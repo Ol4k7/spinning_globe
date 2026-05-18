@@ -1,0 +1,62 @@
+body {
+    margin: 0; padding: 0;
+    background: #0f111a;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    display: flex; flex-direction: column; min-height: 100vh;
+}
+
+.globe-ambient-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, rgba(15,17,26,0) 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    animation: pulseLab 6s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+/* 1. Globe Stage */
+#dom-globe-container {
+    margin-top: auto;
+    position: absolute; /* change this to relative if you want it to be part of the normal flow */
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    perspective: 1000px;
+    pointer-events: none;
+}
+
+/* 2. Ghost Icons (Absolute dead center) */
+.floating-icon {
+    position: absolute;
+    width: 32px; height: 32px;
+    top: 50%; left: 50%;
+    margin-top: -16px; margin-left: -16px;
+    filter: grayscale(100%) brightness(500%);
+    opacity: 0.15;
+    transition: opacity 0.4s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    outline: none;
+    will-change: transform;
+}
+
+/* 3. Front Hover & Tech Icons */
+.floating-icon.is-front:not(.live-link) { opacity: 0.5; }
+
+/* 4. Active Social Icons */
+.floating-icon.live-link {
+    width: 60px; height: 60px;
+    margin-top: -30px; margin-left: -30px; /* Offset adjusted for bigger size */
+    pointer-events: auto;
+}
+
+.floating-icon.live-link.is-front {
+    opacity: 1 !important;
+    filter: none !important; 
+    cursor: pointer;
+    filter: contrast(100%) brightness(100%) saturate(100%) drop-shadow(0 0 10px rgba(0, 212, 255, 0.4)) !important;
+}
